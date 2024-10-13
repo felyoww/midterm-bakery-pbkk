@@ -40,6 +40,8 @@ class OrderResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
 
+    protected static ?int $navigationSort = 4;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -55,7 +57,7 @@ class OrderResource extends Resource
 
                         Select::make('payment_method')
                             ->options([
-                                'stripe' => 'Stripe',
+                                'ewallet' => 'E-Wallet',
                                 'cod' => 'Cash On Delivery',
                                 'paylater' => 'Pay Later'
                             ])
@@ -99,20 +101,17 @@ class OrderResource extends Resource
                         Select::make('currency')
                             ->options([
                                 'idr' => 'IDR',
-                                'usd' => 'USD',
-                                'eur' => 'EUR',
-                                'gbp' => 'GBP'
+                        
                             ])
                             ->default('idr')
                             ->required(),
                         
                         Select::make('shipping_method')
                             ->options([
-                                'jne' => 'JNE',
-                                'jnt' => 'JNT Express',
-                                'sicepat' => 'SiCepat',
-                                'tiki' => 'Tiki',
-                                'paxel' => 'Paxel'
+                                'gojek' => 'Gojek Instant',
+                                'grab' => 'Grab Instant',
+                                'lalamove' => 'Lalamove',
+                               
                             ]),
                         Textarea::make('notes')
                             ->columnSpanFull()

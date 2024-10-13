@@ -35,6 +35,8 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
 
+    protected static ?int $navigationSort = 3;
+
     public static function form(Form $form): Form
     {
         return $form
@@ -90,11 +92,7 @@ class ProductResource extends Resource
                         ->preload()
                         ->relationship('category' , 'name'),
 
-                    Select::make('brand_id')
-                        ->required()
-                        ->searchable()
-                        ->preload()
-                        ->relationship('brand' , 'name')
+
                 ]),
 
                 Section::make('Status')->schema([
@@ -125,8 +123,7 @@ class ProductResource extends Resource
                     ->searchable(),
                 TextColumn::make('category.name')
                     ->sortable(),
-                TextColumn::make('brand.name')
-                    ->sortable(),
+                
                 TextColumn::make('price')
                     ->money('IDR')
                     ->sortable(),
@@ -151,8 +148,7 @@ class ProductResource extends Resource
             ->filters([
                 SelectFilter::make('category')
                     ->relationship('category', 'name'),
-                SelectFilter::make('brand')
-                    ->relationship('brand', 'name'),
+                
             ])
             ->actions([
                 ActionGroup::make([

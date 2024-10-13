@@ -15,17 +15,14 @@ use Filament\Tables\Columns\TextColumn;
 
 class AddressRelationManager extends RelationManager
 {
-    protected static string $relationship = 'address';
+    protected static string $relationship = 'customer';
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
 
-                TextInput::make('first_name')
-                    ->required()
-                    ->maxLength(255),
-                TextInput::make('last_name')
+                TextInput::make('name')
                     ->required()
                     ->maxLength(255),
 
@@ -38,7 +35,7 @@ class AddressRelationManager extends RelationManager
                     ->required()
                     ->maxLength(255),
                 
-                TextInput::make('state')
+                TextInput::make('province')
                     ->required()
                     ->maxLength(255),
                 
