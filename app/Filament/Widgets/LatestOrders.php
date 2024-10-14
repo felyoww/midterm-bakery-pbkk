@@ -7,6 +7,8 @@ use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
 use App\Filament\Resources\OrderResource;
 use Filament\Tables\Actions\Action;
+use Filament\Tables\Actions\BulkActionGroup;
+use Filament\Tables\Actions\DeleteBulkAction;
 use Filament\Widgets\TableWidget as BaseWidget;
 use App\Models\Order;
 
@@ -28,7 +30,7 @@ class LatestOrders extends BaseWidget
 
                 TextColumn::make('user.name')
                     ->searchable(),
-                
+
                 TextColumn::make('grand_total')
                     ->money('IDR'),
 
@@ -49,7 +51,7 @@ class LatestOrders extends BaseWidget
                         'cancelled' => 'heroicon-m-x-circle',
                     })
                     ->sortable(),
-                
+
                 TextColumn::make('payment_method')
                     ->searchable()
                     ->sortable(),
@@ -63,10 +65,17 @@ class LatestOrders extends BaseWidget
                     ->label('Order Date')
                     ->dateTime(),
             ])
-            ->actions([  // Corrected to 'actions'
+            ->actions([
                 Action::make('View Order')
                     ->url(fn(Order $record): string => OrderResource::getUrl('view', ['record' => $record]))
-                    ->icon('heroicon-m-eye'),
+                    ->color('info')
+                    ->icon('heroicon-o-eye'),
+                Tables\Actions\DeleteAction::make(),
+            ])
+            ->bulkActions([
+                BulkActionGroup::make([
+                    DeleteBulkAction::make(),
+                ]),
             ]);
     }
 }

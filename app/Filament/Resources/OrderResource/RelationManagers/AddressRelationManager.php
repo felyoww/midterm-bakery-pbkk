@@ -9,22 +9,21 @@ use Filament\Tables\Table;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Tables\Columns\TextColumn;
 
 class AddressRelationManager extends RelationManager
 {
-    protected static string $relationship = 'address';
+    protected static string $relationship = 'address'; // Ensure this relationship matches the model
 
     public function form(Form $form): Form
     {
         return $form
             ->schema([
-
                 TextInput::make('first_name')
                     ->required()
                     ->maxLength(255),
+
                 TextInput::make('last_name')
                     ->required()
                     ->maxLength(255),
@@ -33,20 +32,20 @@ class AddressRelationManager extends RelationManager
                     ->required()
                     ->tel()
                     ->maxLength(20),
-                
+
                 TextInput::make('city')
                     ->required()
                     ->maxLength(255),
-                
+
                 TextInput::make('state')
                     ->required()
                     ->maxLength(255),
-                
+
                 TextInput::make('zip_code')
                     ->required()
                     ->numeric()
                     ->maxLength(10),
-                
+
                 Textarea::make('street_address')
                     ->required()
                     ->columnSpanFull(),
@@ -58,24 +57,28 @@ class AddressRelationManager extends RelationManager
         return $table
             ->recordTitleAttribute('street_address')
             ->columns([
-                TextColumn::make('fullname')
-                    ->label('Full Name'),
+                TextColumn::make('first_name')
+                    ->label('First Name'),
                 
-                TextColumn::make('phone'),
-                    //->label('Full Name'),
+                TextColumn::make('last_name')
+                    ->label('Last Name'),
 
-                TextColumn::make('city'),
-                    //->label('Full Name'),
-                TextColumn::make('state'),
-                    //->label('Full Name'),
-                TextColumn::make('zip_code'),
-                    //->label('Full Name'),
+                TextColumn::make('phone')
+                    ->label('Phone'),
+
+                TextColumn::make('city')
+                    ->label('City'),
+
+                TextColumn::make('state')
+                    ->label('State'),
+
+                TextColumn::make('zip_code')
+                    ->label('Zip Code'),
+
                 TextColumn::make('street_address')
-                    //->label('Full Name'),
+                    ->label('Street Address'),
             ])
-            ->filters([
-                //
-            ])
+            ->filters([/* Add filters if needed */])
             ->headerActions([
                 Tables\Actions\CreateAction::make(),
             ])

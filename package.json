@@ -14,7 +14,10 @@
         "vite": "^5.0"
     },
     "dependencies": {
+<<<<<<< HEAD
         "esbuild": "^0.24.0",
+=======
+>>>>>>> ca9982d50baa0761ceeaf9332969f5ede8fd7d8e
         "preline": "^2.5.0"
     }
 }

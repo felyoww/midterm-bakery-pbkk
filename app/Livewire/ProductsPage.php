@@ -12,12 +12,10 @@ use App\Helpers\CartManagement;
 use App\Livewire\Partials\Navbar;
 use Jantinnerezo\LivewireAlert\LivewireAlert;
 
-
 #[Title('Products - Atherial Bakery')]
 class ProductsPage extends Component
 {
     use LivewireAlert;
-    
     use WithPagination;
 
     #[Url]
@@ -35,8 +33,9 @@ class ProductsPage extends Component
     #[Url]
     public $sort = 'latest';
 
-    //add product to cart methode
-    public function addToCart($product_id){
+    // Add product to cart method
+    public function addToCart($product_id)
+    {
         $total_count = CartManagement::addItemToCart($product_id);
 
         $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
@@ -50,35 +49,35 @@ class ProductsPage extends Component
 
     public function render()
     {
-        $productQuery = Product::query()->where('on_sale',1);
+        $productQuery = Product::query()->where('on_sale', 1);
 
-        if(!empty($this->selected_categories)){
+        if (!empty($this->selected_categories)) {
             $productQuery->whereIn('category_id', $this->selected_categories);
         }
 
-        if($this->on_sale){
+        if ($this->on_sale) {
             $productQuery->where('on_sale', 1);
         }
 
-        if($this->in_stock){
+        if ($this->in_stock) {
             $productQuery->where('in_stock', 1);
         }
 
-        if($this->price_range){
+        if ($this->price_range) {
             $productQuery->whereBetween('price', [0, $this->price_range]);
         }
 
-        if($this->sort == 'latest'){
+        if ($this->sort == 'latest') {
             $productQuery->latest();
         }
 
-        if($this->sort == 'price'){
+        if ($this->sort == 'price') {
             $productQuery->orderBy('price');
         }
 
         return view('livewire.products-page', [
             'products' => $productQuery->paginate(6),
-            'categories' => Category::where('is_active', 1)->get(['id', 'name' , 'slug']),
+            'categories' => Category::where('is_active', 1)->get(['id', 'name', 'slug']),
         ]);
     }
 }

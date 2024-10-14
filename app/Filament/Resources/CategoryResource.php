@@ -2,58 +2,42 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use Filament\Forms\Set;
 use App\Models\Category;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Illuminate\Support\Str;
+use Filament\Forms;
+use Filament\Forms\Components\{Grid, Section, TextInput, FileUpload, Toggle};
 use Filament\Resources\Resource;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\FileUpload;
+use Filament\Tables;
+use Filament\Tables\Actions\{ActionGroup, DeleteAction, EditAction, ViewAction};
+use Filament\Tables\Columns\{ImageColumn, TextColumn, IconColumn};
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\CategoryResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\ViewAction;
-use Filament\Tables\Actions\EditAction;
 
 class CategoryResource extends Resource
 {
     protected static ?string $model = Category::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-tag';
-
     protected static ?int $navigationSort = 3;
 
-    public static function form(Form $form): Form
+    public static function form(Forms\Form $form): Forms\Form
     {
-        return $form
-          ->schema([
+        return $form->schema([
             Section::make([
-                Grid::make()
-                    ->schema([
-                        TextInput::make('name')
-                            ->required()
-                            ->maxLength(255)
-                            ->live(onBlur: true)
-                            ->afterStateUpdated(fn(string $operation, $state, Set $set) => $operation
-                              === 'create' ? $set('slug', Str::slug($state)) : null),
+                Grid::make()->schema([
+                    TextInput::make('name')
+                        ->required()
+                        ->maxLength(255)
+                        ->live(onBlur: true)
+                        ->afterStateUpdated(fn(string $operation, $state, Forms\Set $set) => 
+                            $operation === 'create' ? $set('slug', Str::slug($state)) : null
+                        ),
 
-                        TextInput::make('slug')
-                            ->maxLength(255)
-                            ->disabled()
-                            ->required()
-                            ->dehydrated()
-                            ->unique(Category::class, 'slug' , ignoreRecord: true),
-
-                    ]),
+                    TextInput::make('slug')
+                        ->maxLength(255)
+                        ->disabled()
+                        ->required()
+                        ->dehydrated()
+                        ->unique(Category::class, 'slug', ignoreRecord: true),
 
                     FileUpload::make('image')
                         ->image()
@@ -61,43 +45,29 @@ class CategoryResource extends Resource
 
                     Toggle::make('is_active')
                         ->required()
-                        ->default(true)
-               ])
-          ]);
+                        ->default(true),
+                ]),
+            ]),
+        ]);
     }
 
-    public static function table(Table $table): Table
+    public static function table(Tables\Table $table): Tables\Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                
-                Tables\Columns\ImageColumn::make('image'),
-
-                Tables\Columns\TextColumn::make('slug')
-                    ->searchable(),
-                
-                Tables\Columns\IconColumn::make('is_active')
-                    ->boolean(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-                Tables\Columns\TextColumn::make('updated_at')
-                    ->dateTime()
-                    ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
+                TextColumn::make('name')->searchable(),
+                ImageColumn::make('image'),
+                TextColumn::make('slug')->searchable(),
+                IconColumn::make('is_active')->boolean(),
+                TextColumn::make('created_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
+                TextColumn::make('updated_at')->dateTime()->sortable()->toggleable(isToggledHiddenByDefault: true),
             ])
             ->actions([
                 ActionGroup::make([
                     ViewAction::make(),
                     EditAction::make(),
                     DeleteAction::make(),
-                ])
+                ]),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -109,7 +79,7 @@ class CategoryResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            // Define relations if needed
         ];
     }
 

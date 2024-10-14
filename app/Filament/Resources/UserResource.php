@@ -10,11 +10,8 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use Filament\Forms\Components\TextInput;
-use Filament\View\LegacyComponents\Page;
 use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\UserResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use App\Filament\Resources\UserResource\RelationManagers;
 use Filament\Actions\ActionGroup;
 
 class UserResource extends Resource
@@ -31,23 +28,23 @@ class UserResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('name')->required(),
-    
-                Forms\Components\TextInput::make('email')
+                TextInput::make('name')->required(),
+
+                TextInput::make('email')
                     ->label('Email Address')
                     ->email()
                     ->maxLength(255)
                     ->unique(ignoreRecord: true)
                     ->required(),
-    
+
                 Forms\Components\DateTimePicker::make('email_verified_at')
                     ->label('Email Verified At')
                     ->default(now()),
-    
-                Forms\Components\TextInput::make('password')
+
+                TextInput::make('password')
                     ->password()
                     ->dehydrated(fn($state) => filled($state))
-                    ->required(fn ($livewire): bool => $livewire instanceof Pages\CreateUser),
+                    ->required(fn($livewire): bool => $livewire instanceof Pages\CreateUser),
             ]);
     }
 
@@ -55,26 +52,20 @@ class UserResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('email_verified_at')
-                    ->dateTime()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
-                    ->sortable(),
+                Tables\Columns\TextColumn::make('name')->searchable(),
+                Tables\Columns\TextColumn::make('email')->searchable(),
+                Tables\Columns\TextColumn::make('email_verified_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('created_at')->dateTime()->sortable(),
             ])
             ->filters([
-                //
+                // Add any filters here if needed
             ])
             ->actions([
-               Tables\Actions\ActionGroup::make([
+                Tables\Actions\ActionGroup::make([
                     Tables\Actions\EditAction::make(),
                     Tables\Actions\ViewAction::make(),
                     Tables\Actions\DeleteAction::make(),
-               ])
+                ])
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -86,12 +77,11 @@ class UserResource extends Resource
     public static function getRelations(): array
     {
         return [
-            OrdersRelationManager::class
+            OrdersRelationManager::class,
         ];
     }
 
-    // Add the 'function' keyword here to avoid the error
-    public static function getGloballySearchableAttributes(): array 
+    public static function getGloballySearchableAttributes(): array
     {
         return ['name', 'email'];
     }

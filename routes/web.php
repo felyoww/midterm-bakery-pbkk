@@ -22,15 +22,15 @@ Route::get('/products', ProductsPage::class);
 Route::get('/cart', CartPage::class);
 Route::get('/products/{slug}', ProductDetailPage::class);
 
-Route::middleware('guest')->group(function(){
+Route::middleware('guest')->group(function() {
     Route::get('/login', LoginPage::class)->name('login');
     Route::get('/register', RegisterPage::class);
     Route::get('/forgot', ForgotPasswordPage::class);
     Route::get('/reset', ResetPasswordPage::class);
 });
 
-Route::middleware('auth')->group(function(){
-    Route::get('/logout', function(){
+Route::middleware('auth')->group(function() {
+    Route::get('/logout', function() {
         auth()->logout();
         return redirect('/');
     });
@@ -39,5 +39,5 @@ Route::middleware('auth')->group(function(){
     Route::get('/my-orders', MyOrdersPage::class);
     Route::get('/my-orders/{order_id}', MyOrderDetailPage::class)->name('my-orders.show');
     Route::get('/success', SuccessPage::class)->name('success');
-    Route::get('/cancel', CancelPage::class)->name(name: 'cancel');
-}); 
+    Route::get('/cancel', CancelPage::class)->name('cancel');
+});
