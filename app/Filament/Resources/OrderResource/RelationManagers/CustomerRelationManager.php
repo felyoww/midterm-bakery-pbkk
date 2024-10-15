@@ -32,7 +32,7 @@ use Filament\Tables\Actions\DeleteAction;
 use Filament\Tables\Actions\ViewAction;
 use Filament\Tables\Actions\EditAction;
 
-class OrderResource extends Resource
+class CustomerRelationManager extends Resource
 {
     protected static ?string $model = Order::class;
 
@@ -57,7 +57,6 @@ class OrderResource extends Resource
                                 'ewallet' => 'E-Wallet',
                                 'cod' => 'Cash On Delivery',
                                 'paylater' => 'Pay Later',
-                                'stripe' => 'Stripe',
                             ])
                             ->required(),
 
@@ -99,18 +98,12 @@ class OrderResource extends Resource
                         Select::make('currency')
                             ->options([
                                 'idr' => 'IDR',
-                                'usd' => 'USD',
-                                'eur' => 'EUR',
-                                'gbp' => 'GBP',
                             ])
                             ->default('idr')
                             ->required(),
 
                         Select::make('shipping_method')
                             ->options([
-                                'jne' => 'JNE',
-                                'jnt' => 'JNT Express',
-                                'sicepat' => 'SiCepat',
                                 'gojek' => 'Gojek Instant',
                                 'grab' => 'Grab Instant',
                                 'lalamove' => 'Lalamove',

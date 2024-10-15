@@ -43,7 +43,7 @@ class OrderResource extends Resource
                             'ewallet' => 'E-Wallet',
                             'cod' => 'Cash On Delivery',
                             'paylater' => 'Pay Later',
-                            'stripe' => 'Stripe', // Include the option from the other branch
+                        
                         ])
                         ->required(),
 
@@ -85,18 +85,12 @@ class OrderResource extends Resource
                     Select::make('currency')
                         ->options([
                             'idr' => 'IDR',
-                            'usd' => 'USD',
-                            'eur' => 'EUR',
-                            'gbp' => 'GBP',
                         ])
                         ->default('idr')
                         ->required(),
 
                     Select::make('shipping_method')
                         ->options([
-                            'jne' => 'JNE',
-                            'jnt' => 'JNT Express',
-                            'sicepat' => 'SiCepat',
                             'gojek' => 'Gojek Instant',
                             'grab' => 'Grab Instant',
                             'lalamove' => 'Lalamove',
@@ -162,6 +156,7 @@ class OrderResource extends Resource
 
                     Hidden::make('grand_total')->default(0),
                 ])->columnSpanFull()
+                ])
             ]);
     }
 

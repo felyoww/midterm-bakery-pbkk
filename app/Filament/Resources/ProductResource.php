@@ -90,12 +90,6 @@ class ProductResource extends Resource
                             ->searchable()
                             ->preload()
                             ->relationship('category', 'name'),
-
-                        Select::make('brand_id')
-                            ->required()
-                            ->searchable()
-                            ->preload()
-                            ->relationship('brand', 'name')
                     ]),
 
                     Section::make('Status')->schema([
@@ -124,7 +118,6 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('name')->searchable(),
                 TextColumn::make('category.name')->sortable(),
-                TextColumn::make('brand.name')->sortable(),
                 TextColumn::make('price')->money('IDR')->sortable(),
                 IconColumn::make('is_featured')->boolean(),
                 IconColumn::make('on_sale')->boolean(),
@@ -135,7 +128,6 @@ class ProductResource extends Resource
             ])
             ->filters([
                 SelectFilter::make('category')->relationship('category', 'name'),
-                SelectFilter::make('brand')->relationship('brand', 'name'),
             ])
             ->actions([
                 ActionGroup::make([
