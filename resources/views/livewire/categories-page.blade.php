@@ -1,3 +1,4 @@
+<div class="bg-violet-300">
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
   <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
     <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
@@ -25,4 +26,5 @@
       @endforeach
     </div>
   </div>
+</div>
 </div>

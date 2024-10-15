@@ -1,5 +1,5 @@
 <div>
-    <div class="w-full h-screen bg-gradient-to-r from-black to-red-600 py-10 px-4 sm:px-6 lg:px-8 mx-auto">
+    <div class="w-full  bg-gradient-to-r from-black to-rose-500 py-10 sm:px-6  mx-auto">
         <div class="max-w-[85rem] mx-auto px-4 sm:px-6 lg:px-8">
           <!-- Grid -->
           <div class="grid md:grid-cols-2 gap-4 md:gap-8 xl:gap-20 md:items-center">
@@ -42,18 +42,13 @@
                   </div>
       
                   <p class="mt-3 text-sm text-white dark:text-white-200">
-                    <span class="font-bold">4.6</span> /5 - from 12k reviews
+                    <span class="font-bold">4.6</span> /5 - from 200 reviews
                   </p>
       
                   <div class="mt-5">
-                    <!-- Star -->
-                 
-                    <!-- End Star -->
                   </div>
                 </div>
-                <!-- End Review -->
-      
-                <!-- Review -->
+
                 <div class="py-5">
                   <div class="flex space-x-1">
                     <svg class="h-4 w-4 text-white dark:text-white" width="51" height="51" viewBox="0 0 51 51" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,72 +70,44 @@
                   </div>
       
                   <p class="mt-3 text-sm text-white dark:text-white">
-                    <span class="font-bold">4.8</span> /5 - from 5k reviews
+                    <span class="font-bold">4.8</span> /5 - from 300 reviews
                   </p>
       
                   <div class="mt-5">
-                    <!-- Star -->
-                 
-                    <!-- End Star -->
                   </div>
                 </div>
-                <!-- End Review -->
               </div>
-              <!-- End Review -->
             </div>
-            <!-- End Col -->
-      
+
             <div class="relative ms-4">
-              <img class="w-full rounded-md" src="https://static.vecteezy.com/system/resources/previews/011/993/278/non_2x/3d-render-online-shopping-bag-using-credit-card-or-cash-for-future-use-credit-card-money-financial-security-on-mobile-3d-application-3d-shop-purchase-basket-retail-store-on-e-commerce-free-png.png" alt="Image Description">
+              <img class="w-full rounded-md" src="{{ asset('images/aetherialcake.png') }}" alt="Fantasy">
               <div class="absolute inset-0 -z-[1] bg-gradient-to-tr from-gray-200 via-white/0 to-white/0 w-full h-full rounded-md mt-4 -mb-4 me-4 -ms-4 lg:mt-6 lg:-mb-6 lg:me-6 lg:-ms-6 dark:from-slate-800 dark:via-slate-900/0 dark:to-slate-900/0"></div>
-      
-              <!-- SVG-->
               <div class="absolute bottom-0 start-0">
                 <svg class="w-2/3 ms-auto h-auto text-white dark:text-slate-900" width="630" height="451" viewBox="0 0 630 451" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <rect x="531" y="352" width="99" height="99" fill="currentColor" />
-                  <rect x="140" y="352" width="106" height="99" fill="currentColor" />
-                  <rect x="482" y="402" width="64" height="49" fill="currentColor" />
-                  <rect x="433" y="402" width="63" height="49" fill="currentColor" />
-                  <rect x="384" y="352" width="49" height="50" fill="currentColor" />
-                  <rect x="531" y="328" width="50" height="50" fill="currentColor" />
-                  <rect x="99" y="303" width="49" height="58" fill="currentColor" />
-                  <rect x="99" y="352" width="49" height="50" fill="currentColor" />
-                  <rect x="99" y="392" width="49" height="59" fill="currentColor" />
-                  <rect x="44" y="402" width="66" height="49" fill="currentColor" />
-                  <rect x="234" y="402" width="62" height="49" fill="currentColor" />
-                  <rect x="334" y="303" width="50" height="49" fill="currentColor" />
-                  <rect x="581" width="49" height="49" fill="currentColor" />
-                  <rect x="581" width="49" height="64" fill="currentColor" />
-                  <rect x="482" y="123" width="49" height="49" fill="currentColor" />
-                  <rect x="507" y="124" width="49" height="24" fill="currentColor" />
-                  <rect x="531" y="49" width="99" height="99" fill="currentColor" />
                 </svg>
               </div>
-              <!-- End SVG-->
             </div>
-            <!-- End Col -->
           </div>
-          <!-- End Grid -->
         </div>
       </div>
 
       {{-- category section start --}}
-      <div class="bg-orange-200 py-20">
+      <div class="bg-gradient-to-r from-indigo-800 to-rose-500 py-16">
         <div class="max-w-xl mx-auto">
           <div class="text-center ">
             <div class="relative flex flex-col items-center">
-              <h1 class="text-5xl font-bold dark:text-gray-200"> Search Our <span class="text-blue-500"> Menu
+              <h1 class="text-5xl font-bold dark:text-gray-200"> Search Our <span class="text-red-300"> Menu
                 </span> </h1>
               <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
-                <div class="flex-1 h-2 bg-blue-200">
+                <div class="flex-1 h-2 bg-pink-300">
                 </div>
-                <div class="flex-1 h-2 bg-blue-400">
+                <div class="flex-1 h-2 bg-pink-400">
                 </div>
-                <div class="flex-1 h-2 bg-blue-600">
+                <div class="flex-1 h-2 bg-pink-500">
                 </div>
               </div>
             </div>
-            <p class="mb-12 text-base text-center text-gray-500">
+            <p class="mb-12 text-base text-center text-black">
               Discover your new favorite today!
             </p>
           </div>
@@ -171,68 +138,38 @@
                   </div>
                 </div>
               </a>
-        
-                
             @endforeach
-           
-           
-      
           </div>
         </div>
-      
       </div>
-
       {{-- category section end --}}
 
       {{-- customer review start --}}
-
-      {{-- <section class="py-14 font-poppins dark:bg-gray-800">
-        <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
-            <div class="max-w-xl mx-auto">
-                <div class="text-center ">
-                    <div class="relative flex flex-col items-center">
-                        <h1 class="text-5xl font-bold dark:text-gray-200"> Customer <span class="text-blue-500"> Reviews </span> </h1>
-                        <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
-                            <div class="flex-1 h-2 bg-blue-200"></div>
-                            <div class="flex-1 h-2 bg-blue-400"></div>
-                            <div class="flex-1 h-2 bg-blue-600"></div>
-                        </div>
-                    </div>
-                    @foreach($reviews as $review)
-                        <p class="mb-12 text-base text-center text-gray-500">
-                            {{ $review['review'] }}
-                        </p>
-                    @endforeach
-                </div>
-            </div>
-        </div>
-    </section> --}}
-
-      <section class="py-14 font-poppins dark:bg-gray-800">
-        <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
+      <section class="py-14 font-poppins bg-gradient-to-r from-rose-900 to-pink-400">
+        <div class="max-w-6xl px-4 mx-auto lg:py-4 md:px-6">
           <div class="max-w-xl mx-auto">
             <div class="text-center ">
               <div class="relative flex flex-col items-center">
-                <h1 class="text-5xl font-bold dark:text-gray-200"> Customer <span class="text-blue-500"> Reviews
+                <h1 class="text-5xl font-bold black"> Customer <span class="text-violet-800"> Reviews
                   </span> </h1>
                 <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
-                  <div class="flex-1 h-2 bg-blue-200">
+                  <div class="flex-1 h-2 bg-pink-300">
                   </div>
-                  <div class="flex-1 h-2 bg-blue-400">
+                  <div class="flex-1 h-2 bg-pink-400">
                   </div>
-                  <div class="flex-1 h-2 bg-blue-600">
+                  <div class="flex-1 h-2 bg-pink-500">
                   </div>
                 </div>
               </div>
-              <p class="mb-12 text-base text-center text-gray-500">
+              <p class="mb-12 text-base text-center black">
                 The dragon loaf here is incredible! Soft, sweet, and full of flavor. Perfect for fantasy lovers.
               </p>
             </div>
           </div>
       
-         <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
+         <div class="max-w-6xl px-4 mx-auto lg:py-4 md:px-6">
            
-            <div class="py-6 bg-white rounded-md shadow dark:bg-gray-900">
+            <div class="py-6 mb-6 bg-white rounded-md shadow dark:bg-gray-900">
               <div class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
                 <div class="flex items-center px-6 mb-2 md:mb-0 ">
                   <div class="flex mr-2 rounded-full">
@@ -240,11 +177,11 @@
                   </div>
                   <div>
                     <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
-                      Sonira Roy</h2>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Manager</p>
+                      Dewi Permatasari</h2>
+                    
                   </div>
                 </div>
-                <p class="px-6 text-base font-medium text-gray-600 dark:text-gray-400"> Joined 12, SEP , 2022
+                <p class="px-6 text-base font-medium text-gray-600 dark:text-gray-400"> Joined 10 Oct 2024
                 </p>
               </div>
               <p class="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">
@@ -287,7 +224,7 @@
                     </li>
                   </ul>
                   <h2 class="text-sm text-gray-500 dark:text-gray-400">Rating:<span class="font-semibold text-gray-600 dark:text-gray-300">
-                      3.0</span>
+                      4.0</span>
                   </h2>
                 </div>
                 <div class="flex items-center px-6 space-x-1 text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -310,7 +247,7 @@
                 </div>
               </div>
             </div>
-            <div class="py-6 bg-white rounded-md shadow dark:bg-gray-900">
+            <div class="py-6 mb-6 bg-white rounded-md shadow dark:bg-gray-900">
               <div class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
                 <div class="flex items-center px-6 mb-2 md:mb-0 ">
                   <div class="flex mr-2 rounded-full">
@@ -318,11 +255,11 @@
                   </div>
                   <div>
                     <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
-                      William harry</h2>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Marketing Officer</p>
+                      Gilang Hermawan</h2>
+                    
                   </div>
                 </div>
-                <p class="px-6 text-base font-medium text-gray-600 dark:text-gray-400"> Joined 12, SEP , 2022
+                <p class="px-6 text-base font-medium text-gray-600 dark:text-gray-400"> Joined 10 Oct 2024
                 </p>
               </div>
               <p class="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">
@@ -365,7 +302,7 @@
                     </li>
                   </ul>
                   <h2 class="text-sm text-gray-500 dark:text-gray-400">Rating:<span class="font-semibold text-gray-600 dark:text-gray-300">
-                      3.0</span>
+                      3.8</span>
                   </h2>
                 </div>
                 <div class="flex items-center px-6 space-x-1 text-sm font-medium text-gray-500 dark:text-gray-400">
@@ -396,11 +333,11 @@
                   </div>
                   <div>
                     <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
-                      James jack</h2>
-                    <p class="text-xs text-gray-500 dark:text-gray-400">Java Programmer</p>
+                      Adit Fajar</h2>
+                   
                   </div>
                 </div>
-                <p class="px-6 text-base font-medium text-gray-600 dark:text-gray-400"> Joined 12, SEP , 2022
+                <p class="px-6 text-base font-medium text-gray-600 dark:text-gray-400"> Joined 10 September 2024
                 </p>
               </div>
               <p class="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">

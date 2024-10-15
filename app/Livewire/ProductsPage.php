@@ -76,7 +76,7 @@ class ProductsPage extends Component
         }
 
         return view('livewire.products-page', [
-            'products' => $productQuery->paginate(6),
+            'products' => $productQuery->paginate(50),
             'categories' => Category::where('is_active', 1)->get(['id', 'name', 'slug']),
         ]);
     }

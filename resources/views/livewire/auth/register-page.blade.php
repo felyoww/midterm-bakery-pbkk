@@ -1,11 +1,12 @@
+<div class="bg-gradient-to-r from-pink-400 to-rose-500">
 <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
   <div class="flex h-full items-center">
       <main class="w-full max-w-md mx-auto p-6">
-          <div class="bg-white border border-gray-200 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
+          <div class="bg-violet-400 border border-violet-400 rounded-xl shadow-sm dark:bg-gray-800 dark:border-gray-700">
               <div class="p-4 sm:p-7">
                   <div class="text-center">
                       <h1 class="block text-2xl font-bold text-gray-800 dark:text-white">Sign up</h1>
-                      <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                      <p class="mt-2 text-sm text-gray-8w00 dark:text-gray-800">
                           Already have an account?
                           <a wire:navigate class="text-blue-600 decoration-2 hover:underline font-medium dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" href="/login">
                               Sign in here
@@ -75,4 +76,5 @@
           </div>
       </main>
   </div>
+</div>
 </div>
