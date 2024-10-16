@@ -13,11 +13,13 @@
 ### CDM and PDM
 CDM 
 
-![PBKK-2024-10-16_13-43](https://github.com/user-attachments/assets/035fa528-d10b-43a0-9039-7f8309bf3ca7)
+![PBKK-2024-10-16_13-43](https://github.com/user-attachments/assets/beb7e7d4-e489-4924-b803-d7c769e5e338)
 
 PDM
 
-![PBKK_Physical_Export-2024-10-16_13-43](https://github.com/user-attachments/assets/e39386de-cfac-4ef6-a0e0-c3b7488f903a)
+![PBKK_Physical_Export-2024-10-16_13-43](https://github.com/user-attachments/assets/5681c113-41a6-40fe-9cbf-6f00fa201087)
+
+
 
 
 
