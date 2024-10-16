@@ -17,7 +17,7 @@ class CheckoutPage extends Component
     public $first_name;
     public $last_name;
     public $phone;
-    public $street_customer;
+    public $street_address;
     public $city;
     public $zip_code;
     public $province;
@@ -32,17 +32,17 @@ class CheckoutPage extends Component
 
     public function placeOrder(){
         
-
         $this->validate([
             'first_name' => 'required',
             'last_name' => 'required',
             'phone' => 'required',
-            'street_customer' => 'required',
+            'street_address' => 'required',
             'city' => 'required',
             'province' => 'required',
             'zip_code' => 'required',
             'payment_method' => 'required'
         ]);
+        //dump("hit");
     
         $cart_items = CartManagement::getCartItemsFromCookie();
 
@@ -62,7 +62,7 @@ class CheckoutPage extends Component
         $customer->first_name = $this->first_name;
         $customer->last_name = $this->last_name;
         $customer->phone = $this->phone;
-        $customer->street_customer = $this->street_customer;
+        $customer->street_address = $this->street_address;
         $customer->city = $this->city;
         $customer->province = $this->province;
         $customer->zip_code = $this->zip_code;

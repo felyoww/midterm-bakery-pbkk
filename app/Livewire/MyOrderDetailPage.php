@@ -2,7 +2,7 @@
 
 namespace App\Livewire;
 
-use App\Models\Address;
+use App\Models\Customer;
 use App\Models\Order;
 use App\Models\OrderItem;
 use Livewire\Component;
@@ -21,12 +21,12 @@ class MyOrderDetailPage extends Component
     public function render()
     {
         $order_items = OrderItem::with('product')->where('order_id', $this->order_id)->get();
-        $address = Address::where('order_id', $this->order_id)->first();
+        $customer = Customer::where('order_id', $this->order_id)->first();
         $order = Order::where('id', $this->order_id)->first();
-
+        //dd($order_items);
         return view('livewire.my-order-detail-page', [
             'order_items' => $order_items,
-            'address' => $address,
+            'customer' => $customer,
             'order' => $order,
         ]);
     }

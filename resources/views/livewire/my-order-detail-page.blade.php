@@ -193,7 +193,7 @@
           <h1 class="font-3xl font-bold text-slate-500 mb-3">Shipping Address</h1>
           <div class="flex justify-between items-center">
             <div>
-              <p>{{ $customer->street_customer }}, {{ $customer->city }}, {{ $customer->state }}, {{ $customer->zip_code }}</p>
+              <p>{{ $customer->street_address }}, {{ $customer->city }}, {{ $customer->state }}, {{ $customer->zip_code }}</p>
             </div>
             <div>
               <p class="font-semibold">Phone:</p>

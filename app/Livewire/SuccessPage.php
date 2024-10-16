@@ -32,7 +32,7 @@ class SuccessPage extends Component
                 $latest_order->save();
             }
         }
-        dd($this->session_id, $session_info);
+       
 
         return view('livewire.success-page', [
             'order' => $latest_order,

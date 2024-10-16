@@ -12,6 +12,7 @@ class MyOrdersPage extends Component
 {
     use WithPagination;
 
+
     public function render()
     {
         $my_orders = Order::where('user_id', auth()->id())->latest()->paginate(10);
