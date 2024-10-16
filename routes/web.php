@@ -26,16 +26,30 @@ Route::middleware('guest')->group(function(){
 
 });
 
-Route::post('/logout', function(){
-    auth()->logout();
-    return redirect('/');
-})->name('logout');
+// Route::post('/logout', function(){
+//     auth()->logout();
+//     return redirect('/');
+// })->name('logout');
 
 
-    Route::get('/checkout', CheckoutPage::class);
-    Route::get('/my-orders', MyOrdersPage::class);
-    Route::get('/my-orders/{order_id}', MyOrderDetailPage::class)->name('my-orders.show');
-    Route::get('/success', SuccessPage::class)->name('success');
-    Route::get('/cancel', CancelPage::class)->name(name: 'cancel');
+//     Route::get('/checkout', CheckoutPage::class);
+//     Route::get('/my-orders', MyOrdersPage::class);
+//     Route::get('/my-orders/{order_id}', MyOrderDetailPage::class)->name('my-orders.show');
+//     Route::get('/success', SuccessPage::class)->name('success');
+//     Route::get('/cancel', CancelPage::class)->name(name: 'cancel');
+
+    Route::middleware('auth')->group(function(){
+        Route::get('/logout', function(){
+            auth()->logout();
+            return redirect('/');
+        });
+    
+        Route::get('/checkout', CheckoutPage::class);
+        Route::get('/my-orders', MyOrdersPage::class);
+        Route::get('/my-orders/{order_id}', MyOrderDetailPage::class)->name('my-orders.show');
+        Route::get('/success', SuccessPage::class)->name('success');
+        Route::get('/cancel', CancelPage::class)->name(name: 'cancel');
+    }); 
+    
  
 

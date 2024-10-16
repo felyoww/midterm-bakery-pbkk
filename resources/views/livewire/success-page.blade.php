@@ -9,10 +9,10 @@
                       <div class="flex items-center justify-center w-full pb-6 space-x-4 md:justify-start">
                           <div class="flex flex-col items-start justify-start space-y-2">
                               <p class="text-lg font-semibold leading-4 text-left text-gray-800 dark:text-gray-400">
-                                  {{ $order->address->fullname }}</p>
-                              <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">{{ $order->address->street_address }}</p>
-                              <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">{{ $order->address->city }}, {{ $order->address->state }}, {{ $order->address->zip_code }}</p>
-                              <p class="text-sm leading-4 cursor-pointer dark:text-gray-400">Phone: {{ $order->address->phone }}</p>
+                                  {{ $order->custonmer->fullname }}</p>
+                              <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">{{ $order->custonmer->street_custonmer }}</p>
+                              <p class="text-sm leading-4 text-gray-600 dark:text-gray-400">{{ $order->custonmer->city }}, {{ $order->custonmer->province }}, {{ $order->custonmer->zip_code }}</p>
+                              <p class="text-sm leading-4 cursor-pointer dark:text-gray-400">Phone: {{ $order->custonmer->phone }}</p>
                           </div>
                       </div>
                   </div>
@@ -33,7 +33,8 @@
                   <div class="w-full px-4 mb-4 md:w-1/4">
                       <p class="mb-2 text-sm leading-5 text-gray-600 dark:text-gray-400 ">Payment Method:</p>
                       <p class="text-base font-semibold leading-4 text-gray-800 dark:text-gray-400 ">
-                          {{ $order->payment_method == 'cod' ? 'Cash on Delivery' : ($order->payment_method == 'stripe' ? 'Card' : 'PayLater') }}
+                        {{ $order->payment_method == 'cod' ? 'Cash on Delivery' : 'E-Wallet' }}
+
                       </p>
                   </div>
               </div>

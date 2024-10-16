@@ -56,7 +56,7 @@ class CustomerRelationManager extends Resource
                             ->options([
                                 'ewallet' => 'E-Wallet',
                                 'cod' => 'Cash On Delivery',
-                                'paylater' => 'Pay Later',
+                                
                             ])
                             ->required(),
 
