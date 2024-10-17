@@ -31,11 +31,9 @@ use Filament\Tables\Actions\EditAction;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-squares-2x2';
-
-    protected static ?int $navigationSort = 3; // Set to 3 for proper sorting
-
+    protected static ?int $navigationSort = 3;
+    
     public static function form(Form $form): Form
     {
         return $form

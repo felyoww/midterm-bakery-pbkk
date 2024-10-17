@@ -21,11 +21,8 @@ use App\Filament\Resources\OrderResource\RelationManagers\AddressRelationManager
 class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
-
     protected static ?string $navigationIcon = 'heroicon-o-shopping-bag';
-
-    protected static ?int $navigationSort = 4; // Choose either 4 or 5 based on your preference.
-
+    protected static ?int $navigationSort = 4;
     public static function form(Form $form): Form
     {
         return $form->schema([
@@ -158,7 +155,9 @@ class OrderResource extends Resource
                 ])->columnSpanFull()
                 ])
             ]);
+        
     }
+
 
     public static function table(Table $table): Table
     {
