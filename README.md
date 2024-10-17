@@ -8,6 +8,9 @@
 | Fellyla Fiorenza Wilianto       | 5025221110        |
 
 ---
+### YouTube Presentation Recording
+https://youtu.be/Ky3afU6_Pbs?si=cbJfzJVT4eeM5Mo4.
+
 ### Project Explanation
 
 For our Laravel Final Project, our group developed a web application modeled after an E-Commerce platform, which we named "Atherial Bakery." This project is designed as an online bakery shop, offering users a seamless and interactive experience when browsing through a wide variety of bakery products. Customers can explore different menu catalogs, featuring detailed product descriptions, images, and prices. For those interested in making a purchase, a user-friendly checkout system has been integrated, which is accessible upon logging in as a customer.
