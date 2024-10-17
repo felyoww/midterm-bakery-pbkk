@@ -26,7 +26,7 @@ class Order extends Model
         $map = [
             'ewallet' => 'E-Wallet',
             'cod' => 'Cash On Delivery',
-            'paylater' => 'Pay Later',
+            
         ];
         return $map[$value] ?? $value;
     }
