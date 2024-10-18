@@ -1086,6 +1086,205 @@ public static function form(Form $form): Form
 
    ![image](https://github.com/user-attachments/assets/ee6f8868-3c0a-4e32-b132-7cd1b975d257)
 
+    - `home-page.blade.php` for Dashboard display
+
+        ```php
+        ...
+                   {{-- category section start --}}
+              <div class="bg-gradient-to-r from-indigo-800 to-rose-500 py-16">
+                <div class="max-w-xl mx-auto">
+                  <div class="text-center ">
+                    <div class="relative flex flex-col items-center">
+                      <h1 class="text-5xl font-bold dark:text-gray-200"> Search Our <span class="text-red-300"> Menu
+                        </span> </h1>
+                      <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
+                        <div class="flex-1 h-2 bg-pink-300">
+                        </div>
+                        <div class="flex-1 h-2 bg-pink-400">
+                        </div>
+                        <div class="flex-1 h-2 bg-pink-500">
+                        </div>
+                      </div>
+                    </div>
+                    <p class="mb-12 text-base text-center text-black">
+                      Discover your new favorite today!
+                    </p>
+                  </div>
+                </div>
+              
+                <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
+                  <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
+              
+                    @foreach ($categories as $category )
+        
+                    <a class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" 
+                    href="/products?selected_categories[0]={{ $category->id }}" wire::key= "{{ $category->id }}">
+                        <div class="p-4 md:p-5">
+                          <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                              <img class="h-[2.375rem] w-[2.375rem] rounded-full" src="{{ url('storage', $category->image) }}" alt="{{ $category->name }}">
+                              <div class="ms-3">
+                                <h3 class="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
+                                  {{ $category->name }}
+                                </h3>
+                              </div>
+                            </div>
+                            <div class="ps-3">
+                              <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="m9 18 6-6-6-6" />
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </a>
+                    @endforeach
+                  </div>
+                </div>
+              </div>
+              {{-- category section end --}}             
+
+        ...
+        ```
+  
+    - `Categories-page.blade.php` for Categories Page display
+      
+      ```php
+      ...
+              <div class="bg-violet-300">
+        <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
+          <div class="max-w-[85rem] px-4 py-10 sm:px-6 lg:px-8 lg:py-14 mx-auto">
+            <div class="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 sm:gap-6">
+              @foreach ($categories as $category)
+              <a class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" 
+              href="/products?selected_categories[0]={{ $category->id }}" wire:key="{{ $category->id }}">
+                  <div class="p-4 md:p-5">
+                    <div class="flex justify-between items-center">
+                      <div class="flex items-center">
+                        <img class="h-[5rem] w-[5rem]" src="{{ url('storage', $category->image) }}" alt="{{ $category->name }}">
+                        <div class="ms-3">
+                          <h3 class="group-hover:text-blue-600 text-2xl font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
+                            {{ $category->name }}
+                          </h3>
+                        </div>
+                      </div>
+                      <div class="ps-3">
+                        <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                          <path d="m9 18 6-6-6-6" />
+                        </svg>
+                      </div>
+                    </div>
+                  </div>
+                </a>
+              @endforeach
+            </div>
+          </div>
+        </div>
+        </div>
+      ...
+      ```
+    - `Products-page.blade.php` for Products Page display
+      
+        ```php
+      ...
+          <div class="  bg-gradient-to-r from-rose-900 to-cyan-500">
+    <div class="w-full max-w-[85rem] py-10 px-4 sm:px-6 lg:px-8 mx-auto">
+      <section class="py-10 bg-gray-50 font-poppins dark:bg-gray-800 rounded-lg">
+          <div class="px-4 py-4 mx-auto max-w-7xl lg:py-6 md:px-6">
+              <div class="flex flex-wrap mb-24 -mx-3">
+                  <div class="w-full pr-2 lg:w-1/4 lg:block">
+                      <div class="p-4 mb-5 bg-white border border-gray-200 dark:border-gray-900 dark:bg-gray-900">
+                          <h2 class="text-2xl font-bold dark:text-gray-400">Categories</h2>
+                          <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
+                          <ul>
+                              @foreach ($categories as $category)
+                              <li class="mb-4" wire:key="{{ $category->id }}">
+                                  <label for="{{ $category->slug }}" class="flex items-center dark:text-gray-400">
+                                      <input type="checkbox" wire:model.live="selected_categories" id="{{ $category->slug }}" value="{{ $category->id }}" class="w-4 h-4 mr-2">
+                                      <span class="text-lg">{{ $category->name }}</span>
+                                  </label>
+                              </li>
+                              @endforeach
+                          </ul>
+                      </div>
+    
+                      <div class="p-4 mb-5 bg-white border border-gray-200 dark:bg-gray-900 dark:border-gray-900">
+                          <h2 class="text-2xl font-bold dark:text-gray-400">Product Status</h2>
+                          <div class="w-16 pb-2 mb-6 border-b border-rose-600 dark:border-gray-400"></div>
+                          <ul>
+                              <li class="mb-4">
+                                  <label for="in_stock" class="flex items-center dark:text-gray-300">
+                                      <input type="checkbox" wire:model.live="in_stock" id="in_stock" value="1" class="w-4 h-4 mr-2">
+                                      <span class="text-lg dark:text-gray-400">In Stock</span>
+                                  </label>
+                              </li>
+                              <li class="mb-4">
+                                  <label for="on_sale" class="flex items-center dark:text-gray-300">
+                                      <input type="checkbox" wire:model.live="on_sale" id="on_sale" value="1" class="w-4 h-4 mr-2">
+                                      <span class="text-lg dark:text-gray-400">On Sale</span>
+                                  </label>
+                              </li>
+                          </ul>
+                      </div>
+      ...
+      ```
+
+### Route for each pages
+
+    This code defines routes for a web application using Laravel. It includes public routes for pages like home, categories, products, and cart. Guests can access the login and register pages. Authenticated users can log out, access checkout, view their orders, and see success or cancel pages. The routes are managed using Livewire components.
+
+    - `web.php` for routes
+
+    ```php
+    ...
+    
+        use App\Livewire\Auth\LoginPage;
+        use App\Livewire\Auth\RegisterPage;
+        use App\Livewire\CancelPage;
+        use App\Livewire\CartPage;
+        use App\Livewire\CategoriesPage;
+        use App\Livewire\CheckoutPage;
+        use App\Livewire\HomePage;
+        use App\Livewire\MyOrderDetailPage;
+        use App\Livewire\MyOrdersPage;
+        use App\Livewire\ProductDetailPage;
+        use App\Livewire\ProductsPage;
+        use App\Livewire\SuccessPage;
+        use Illuminate\Support\Facades\Route;
+        
+        Route::get('/', HomePage::class);
+        Route::get('/categories', CategoriesPage::class);
+        Route::get('/products', ProductsPage::class);
+        Route::get('/cart', CartPage::class);
+        Route::get('/products/{slug}', ProductDetailPage::class);
+        
+        Route::middleware('guest')->group(function(){
+            Route::get('/login', LoginPage::class)->name('login');
+            Route::get('/register', RegisterPage::class);
+        
+        });
+        
+        
+        
+            Route::middleware('auth')->group(function(){
+                Route::get('/logout', function(){
+                    auth()->logout();
+                    return redirect('/');
+                });
+            
+                Route::get('/checkout', CheckoutPage::class);
+                Route::get('/my-orders', MyOrdersPage::class);
+                Route::get('/my-orders/{order_id}', MyOrderDetailPage::class)->name('my-orders.show');
+                Route::get('/success', SuccessPage::class)->name('success');
+                Route::get('/cancel', CancelPage::class)->name(name: 'cancel');
+            }); 
+    
+    ...
+    ```
+
+
+
+
+
 
 
 
