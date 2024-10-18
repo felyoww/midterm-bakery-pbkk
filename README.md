@@ -540,6 +540,427 @@ public static function form(Form $form): Form
      ...
      ```
 
+     - `LoginPage.php` Livewire/controller
+       
+       ```php
+       ...
+        namespace App\Livewire\Auth;
+        
+        use Livewire\Component;
+        use Livewire\Attributes\Title;
+        
+        #[Title('login')]
+        class LoginPage extends Component
+        {
+            public $email;
+            public $password;
+        
+            public function save()
+            {
+                // Validate the email and password inputs
+                $this->validate([
+                    'email' => 'required|email|max:255|exists:users,email',
+                    'password' => 'required|min:6|max:255',
+                ]);
+        
+                // Attempt to log in the user with provided credentials
+                if (!auth()->attempt(['email' => $this->email, 'password' => $this->password])) {
+                    // If login fails, flash an error message to the session
+                    session()->flash('error', 'Invalid credentials');
+                    return;
+                }
+       ...
+       ```
+       
+     - `RegisterPage.php` Livewire/controller
+       
+           ```php
+       ...
+       namespace App\Livewire\Auth;
+            
+            use App\Models\User;
+            use Livewire\Component;
+            use Livewire\Attributes\Title;
+            use Illuminate\Support\Facades\Hash;
+            
+            #[Title('Register')]
+            class RegisterPage extends Component
+            {
+                public $name;
+                public $email;
+                public $password;
+            
+                // Register user
+                public function save()
+                {
+                    $this->validate([
+                        'name' => 'required|max:255',
+                        'email' => 'required|email|unique:users|max:255',
+                        'password' => 'required|min:6|max:255',
+                    ]);
+            
+                    // Save to database
+                    $user = User::create([
+                        'name' => $this->name,
+                        'email' => $this->email,
+                        'password' => Hash::make($this->password),
+                    ]);
+            
+                    // Login user
+                    auth()->login($user);
+            
+                    // Redirect to homepage
+                    return redirect()->intended();
+                }
+            
+                public function render()
+                {
+                    return view('livewire.auth.register-page');
+                }
+            }
+       ...
+       ```
+       
+     - `CancelPage.php` Livewire/controller
+       
+           ```php
+       ...
+       namespace App\Livewire;
+            
+            use Livewire\Component;
+            
+            class CancelPage extends Component
+            {
+                public function render()
+                {
+                    return view('livewire.cancel-page');
+                }
+            }
+
+       ...
+       ```
+       
+     - `Categories.php` Livewire/controller
+       
+           ```php
+       ...
+       namespace App\Livewire;
+            
+            use Livewire\Component;
+            use App\Models\Category;
+            use Livewire\Attributes\Title;
+            
+            #[Title('Categories - Atherial Bakery')]
+            class CategoriesPage extends Component
+            {
+                public function render()
+                {
+                    $categories = Category::where('is_active', 1)->get();
+                    return view('livewire.categories-page', [
+                        'categories' => $categories,
+                    ]);
+                }
+            }
+
+       ...
+       ```
+       
+     - `CheckoutPage.php` Livewire/controller
+       
+           ```php
+       ...
+       namespace App\Livewire;
+        
+        use App\Mail\OrderPlaced;
+        use App\Models\Order;
+        use App\Models\Customer;
+        use Livewire\Component;
+        use Livewire\Attributes\Title;
+        use App\Helpers\CartManagement;
+        use Illuminate\Support\Facades\Mail;
+        
+        #[Title('Checkout')]
+        class CheckoutPage extends Component
+        {
+        
+            public $first_name;
+            public $last_name;
+            public $phone;
+            public $street_address;
+            public $city;
+            public $zip_code;
+            public $province;
+            public $payment_method;
+        
+            public function mount(){
+                $cart_items = CartManagement::getCartItemsFromCookie();
+                if(count($cart_items) == 0){
+                    return redirect('/products');
+                }
+            }
+        
+            public function placeOrder(){
+                
+                $this->validate([
+                    'first_name' => 'required',
+                    'last_name' => 'required',
+                    'phone' => 'required',
+                    'street_address' => 'required',
+                    'city' => 'required',
+                    'province' => 'required',
+                    'zip_code' => 'required',
+                    'payment_method' => 'required'
+                ]);
+                //dump("hit");
+            
+                $cart_items = CartManagement::getCartItemsFromCookie();
+        
+                // Use auth()->user() properly
+                $order = new Order();
+                $order->user_id = \Illuminate\Support\Facades\Auth::user()->id;
+                $order->grand_total = CartManagement::calculateGrandTotal($cart_items);
+                $order->payment_method = $this->payment_method;
+                $order->payment_status = 'pending';
+                $order->status = 'new';
+                $order->currency = 'idr';
+                $order->shipping_amount = 0;
+                $order->shipping_method = 'none';
+                $order->notes = 'Order placed by ' . \Illuminate\Support\Facades\Auth::user()->name;
+       ...
+       ```
+       
+     - `HomePage.php` Livewire/controller
+       
+           ```php
+       ...
+       namespace App\Livewire;
+        
+        use App\Models\Brand;
+        use App\Models\Category;
+        use Livewire\Component;
+        use Livewire\Attributes\Title;
+        
+        #[Title('Home Page - Aetherial Bakery')]
+        class HomePage extends Component
+        {
+            public function render()
+            {
+                $categories = Category::where('is_active', 1)->get();
+                return view('livewire.home-page', [
+                    'categories' => $categories,
+                ]);
+            }
+        }
+
+       ...
+       ```
+     - `MyOrdersPage.php` Livewire/controller
+       
+           ```php
+       ...
+       namespace App\Livewire;
+            
+            use App\Models\Order;
+            use Livewire\Component;
+            use Livewire\Attributes\Title;
+            use Livewire\WithPagination;
+            
+            #[Title('My Orders')]
+            class MyOrdersPage extends Component
+            {
+                use WithPagination;
+            
+            
+                public function render()
+                {
+                    $my_orders = Order::where('user_id', auth()->id())->latest()->paginate(10);
+                    return view('livewire.my-orders-page', [
+                        'orders' => $my_orders,
+                    ]);
+                }
+            }
+
+       ...
+       ```
+    
+     - `MyOrderDetailPage.php` Livewire/controller
+       
+           ```php
+       ...
+       namespace App\Livewire;
+        
+        use App\Models\Customer;
+        use App\Models\Order;
+        use App\Models\OrderItem;
+        use Livewire\Component;
+        use Livewire\Attributes\Title;
+        
+        #[Title('Order Detail')]
+        class MyOrderDetailPage extends Component
+        {
+            public $order_id;
+        
+            public function mount($order_id)
+            {
+                $this->order_id = $order_id;
+            }
+        
+            public function render()
+            {
+                $order_items = OrderItem::with('product')->where('order_id', $this->order_id)->get();
+                $customer = Customer::where('order_id', $this->order_id)->first();
+                $order = Order::where('id', $this->order_id)->first();
+                //dd($order_items);
+                return view('livewire.my-order-detail-page', [
+                    'order_items' => $order_items,
+                    'customer' => $customer,
+                    'order' => $order,
+                ]);
+            }
+        }
+
+       ...
+       ```
+    
+     - `ProductsDetailPage.php` Livewire/controller
+       
+           ```php
+       ...
+       namespace App\Livewire;
+        
+        use App\Models\Product;
+        use Livewire\Component;
+        use Livewire\Attributes\Title;
+        use App\Helpers\CartManagement;
+        use App\Livewire\Partials\Navbar;
+        use Jantinnerezo\LivewireAlert\LivewireAlert;
+        
+        #[Title('Product Detail - Atherial Bakery')]
+        class ProductDetailPage extends Component
+        {
+            use LivewireAlert;
+        
+            public $slug;
+            public $quantity = 1;
+        
+            public function mount($slug)
+            {
+                $this->slug = $slug;
+            }
+        
+            public function increaseQty()
+            {
+                $this->quantity++;
+            }
+        
+            public function decreaseQty()
+            {
+                if ($this->quantity > 1) {
+                    $this->quantity--;
+                }
+            }
+        
+            public function addToCart($product_id)
+            {
+                $total_count = CartManagement::addItemToCartWithQty($product_id, $this->quantity);
+        
+                $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
+        
+                $this->alert('success', 'Product added to the cart successfully!', [
+                    'position' => 'bottom-end',
+                    'timer' => 3000,
+                    'toast' => true,
+                ]);
+            }
+       ...
+       ```
+       
+     - `ProductsPage.php` Livewire/controller
+       
+           ```php
+       ...
+       namespace App\Livewire;
+        
+        use App\Models\Product;
+        use Livewire\Component;
+        use App\Models\Category;
+        use Livewire\Attributes\Url;
+        use Livewire\WithPagination;
+        use Livewire\Attributes\Title;
+        use App\Helpers\CartManagement;
+        use App\Livewire\Partials\Navbar;
+        use Jantinnerezo\LivewireAlert\LivewireAlert;
+        
+        #[Title('Products - Atherial Bakery')]
+        class ProductsPage extends Component
+        {
+            use LivewireAlert;
+            use WithPagination;
+        
+            #[Url]
+            public $selected_categories = [];
+        
+            #[Url]
+            public $on_sale = [];
+        
+            #[Url]
+            public $in_stock = [];
+        
+            #[Url]
+            public $price_range = 400000;
+        
+            #[Url]
+            public $sort = 'latest';
+        
+            // Add product to cart method
+            public function addToCart($product_id)
+            {
+                $total_count = CartManagement::addItemToCart($product_id);
+        
+                $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
+        
+                $this->alert('success', 'Product added to the cart successfully!', [
+                    'position' => 'bottom-end',
+                    'timer' => 3000,
+                    'toast' => true,
+                ]);
+            }
+       ...
+       ```
+    
+    - `CartPage.php` Livewire/controller
+               ```php
+       ...
+        namespace App\Livewire;
+        
+        use Livewire\Component;
+        use Livewire\Attributes\Title;
+        use App\Helpers\CartManagement;
+        use App\Livewire\Partials\Navbar;
+        
+        #[Title('Cart - Atherial Bakery')]
+        class CartPage extends Component
+        {
+            public $cart_items = [];
+            public $grand_total;
+        
+            public function mount()
+            {
+                $this->cart_items = CartManagement::getCartItemsFromCookie();
+                $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
+            }
+        
+            public function removeItem($product_id)
+            {
+                $this->cart_items = CartManagement::removeCartItem($product_id);
+                $this->grand_total = CartManagement::calculateGrandTotal($this->cart_items);
+                $this->dispatch('update-cart-count', total_count: count($this->cart_items))->to(Navbar::class);
+            }
+
+       ...
+       ```
+       
+
 
    - 
 
