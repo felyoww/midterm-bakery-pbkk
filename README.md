@@ -574,7 +574,7 @@ public static function form(Form $form): Form
        
      - `RegisterPage.php` Livewire/controller
        
-           ```php
+       ```php
        ...
        namespace App\Livewire\Auth;
             
@@ -623,7 +623,7 @@ public static function form(Form $form): Form
        
      - `CancelPage.php` Livewire/controller
        
-           ```php
+       ```php
        ...
        namespace App\Livewire;
             
@@ -642,7 +642,7 @@ public static function form(Form $form): Form
        
      - `Categories.php` Livewire/controller
        
-           ```php
+       ```php
        ...
        namespace App\Livewire;
             
@@ -667,7 +667,7 @@ public static function form(Form $form): Form
        
      - `CheckoutPage.php` Livewire/controller
        
-           ```php
+       ```php
        ...
        namespace App\Livewire;
         
@@ -731,7 +731,7 @@ public static function form(Form $form): Form
        
      - `HomePage.php` Livewire/controller
        
-           ```php
+       ```php
        ...
        namespace App\Livewire;
         
@@ -756,7 +756,7 @@ public static function form(Form $form): Form
        ```
      - `MyOrdersPage.php` Livewire/controller
        
-           ```php
+       ```php
        ...
        namespace App\Livewire;
             
@@ -785,7 +785,7 @@ public static function form(Form $form): Form
     
      - `MyOrderDetailPage.php` Livewire/controller
        
-           ```php
+       ```php
        ...
        namespace App\Livewire;
         
@@ -824,7 +824,7 @@ public static function form(Form $form): Form
     
      - `ProductsDetailPage.php` Livewire/controller
        
-           ```php
+       ```php
        ...
        namespace App\Livewire;
         
@@ -877,7 +877,7 @@ public static function form(Form $form): Form
        
      - `ProductsPage.php` Livewire/controller
        
-           ```php
+       ```php
        ...
        namespace App\Livewire;
         
@@ -929,7 +929,7 @@ public static function form(Form $form): Form
        ```
     
     - `CartPage.php` Livewire/controller
-               ```php
+        ```php
        ...
         namespace App\Livewire;
         
@@ -961,11 +961,131 @@ public static function form(Form $form): Form
        ```
        
 
+### Cart Management Helpers
+         - 
+    This `CartManagement` helper manages a shopping cart using cookies. It provides methods to add items (with or without quantity), remove items, increment/decrement item quantities, and clear the cart. It stores cart data in cookies, retrieves it, and updates it accordingly. The `calculateGrandTotal` method sums up the total amounts of all items in the cart.
 
-   - 
+    - `CartManagement.php` Helpers
+        ```php
+        ...
+                    namespace App\Helpers;
+        
+        use App\Models\Product;
+        use Illuminate\Support\Facades\Cookie;
+        
+        class CartManagement {
+            //add item to cart
+        
+            static public function addItemToCart($product_id){
+                $cart_items = self::getCartItemsFromCookie();
+                $existing_item = null;
+            
+                foreach($cart_items as $key => $item){
+                    if($item['product_id'] == $product_id){
+                        $existing_item = $key;
+                        break;
+                    }
+                }
+            
+                if($existing_item !== null){
+                    // Increment the quantity and calculate total amount
+                    $cart_items[$existing_item]['quantity']++;
+                    $cart_items[$existing_item]['total_amount'] = $cart_items[$existing_item]['quantity'] * $cart_items[$existing_item]['unit_amount'];
+                } else {
+                    // Add new product to cart
+                    $product = Product::where('id', $product_id)->first(['id', 'name', 'price', 'images']);
+                    if($product){
+                        $cart_items[] = [
+                            'product_id' => $product_id,
+                            'name' => $product->name,
+                            'image' => $product->images[0],
+                            'quantity' => 1,
+                            'unit_amount' => $product->price,
+                            'total_amount' => $product->price * 1 // initial quantity is 1
+                        ];
+                    }
+                }
+            
+                self::addCartItemsToCookie($cart_items);
+                return count($cart_items);
+            }
+            
+        
+            //add item to cart with quantity
+            static public function addItemToCartWithQty($product_id, $qty = 1){
+                $cart_items = self::getCartItemsFromCookie();
+                $existing_item = null;
+            
+                foreach($cart_items as $key => $item){
+                    if($item['product_id'] == $product_id){
+                        $existing_item = $key;
+                        break;
+                    }
+        }
+        ...
 
-3.  
-    
+        ```
+
+### OrderPlaced Mail
+    The `OrderPlaced` mailable sends an email when an order is placed. It takes an `$order` object in the constructor, passes it to the email view using Markdown, and sets the subject as "Order Placed - Atherial Bakery." It also generates a URL to view the order details. There are no attachments in this email.
+
+    - `OrderPlaced.php` Mail
+        ```php
+        ...
+                namespace App\Mail;
+        
+        use Illuminate\Bus\Queueable;
+        use Illuminate\Contracts\Queue\ShouldQueue;
+        use Illuminate\Mail\Mailable;
+        use Illuminate\Mail\Mailables\Content;
+        use Illuminate\Mail\Mailables\Envelope;
+        use Illuminate\Queue\SerializesModels;
+        
+        class OrderPlaced extends Mailable
+        {
+            use Queueable, SerializesModels;
+        
+            public $order; // Add this to make $order accessible in the view
+        
+            /**
+             * Create a new message instance.
+             */
+            public function __construct($order)
+            {
+                $this->order = $order;
+            }
+        
+            /**
+             * Get the message envelope.
+             */
+            public function envelope(): Envelope
+            {
+                return new Envelope(
+                    subject: 'Order Placed - Atherial Bakery',
+                );
+            }
+        
+            /**
+             * Get the message content definition.
+             */
+            public function content(): Content
+            {
+                return new Content(
+                    markdown: 'mail.orders.placed',
+                    with: [
+                        'order' => $this->order, // Pass the $order to the view
+                        'url' => route('my-orders.show', $this->order)
+                    ]
+                );
+            }
+        ...
+        ```
+
+### Users Display/ View Page
+1. These are the codes for User Interface/displayed in the website. It Includes all th features that already mentioned before in the above explanation.
+
+   ![image](https://github.com/user-attachments/assets/ee6f8868-3c0a-4e32-b132-7cd1b975d257)
+
 
 
 
