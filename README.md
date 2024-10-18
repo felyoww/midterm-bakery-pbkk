@@ -1,4 +1,4 @@
-# Aetherial Bakery
+![Screenshot 2024-10-17 235728](https://github.com/user-attachments/assets/3e3fcc01-21e6-470e-993f-7a3f2f782bcc)# Aetherial Bakery
 **A Laravel project for Midterm of Framework Programming (IUP Class)**
 
 ## Team Members
@@ -50,6 +50,9 @@ PDM
 4. **Product**: User can browse for products, select, and add products to cart.
 5. **Cart Management**: Users can add products to the cart, adjust quantities, and remove products. Cart data is stored using browser cookies for persistence.
 6. **Checkout**: Users can view an order summary, enter their personal data for shipping purposes, and place an order with provided payment methods.
+7. **Success Page**: Users can get the success page after checkouting that includes the summary of the order with the order ID.
+8. **My Orders** : When users click the login/user bottom, it will display three options and one of them it's my orders page. Here, users can see all of their order with the status of payment and shipping.
+9. **My Oders Detail** : Users can see the order summary detail when clicking the "view page" button in My Orders page. It will display the order summary in more detail.
 
 ### Database Migrations
 #### 1. `create_categories_table`
@@ -385,15 +388,64 @@ public static function form(Form $form): Form
 
      ![image](https://github.com/user-attachments/assets/d560a444-2ec4-452c-87dc-2bf28f3ea552)
 
-   - Add to cart
+   - Add to cart. The cart quantity automatically updated according the amount of products added to the cart.
      
      ![image](https://github.com/user-attachments/assets/64e5808c-d18c-4e46-82d3-189e5e953de0)
 
+     ![image](https://github.com/user-attachments/assets/6d38a340-9bb5-441d-9da8-c22451189610)
 
- 
+
 
    
-6. 
+5.  **Cart Management**: Users can add products to the cart, adjust quantities, and remove products. Cart data is stored using browser cookies for persistence. In this state, it will display the subtotal of each product and the grand total.
+   
+  -  Cart
+    ![Screenshot 2024-10-17 235256](https://github.com/user-attachments/assets/b8adebc4-15fb-40b8-95c8-fc71dc41633c)
+
+  - When there's nothing on the cart
+    
+    ![image](https://github.com/user-attachments/assets/d14462ee-841d-4057-8e45-c0bc5a4dda75)
+
+
+6.  **Checkout**: Users can view an order summary, enter their personal data for shipping purposes, and place an order with provided payment methods.
+   
+   - Checkout Page
+     
+     ![Screenshot 2024-10-17 235719](https://github.com/user-attachments/assets/3f5e7f90-0b25-40c9-a617-675064d5f92a)
+     
+
+7.  **Success Page**: Users can get the success page after checkouting that includes the summary of the order with the order ID.
+   
+   - Success Order Summary
+     
+     ![Screenshot 2024-10-17 235728](https://github.com/user-attachments/assets/307de810-7379-43ed-9c48-4b1e3b168137)
+     
+
+9. **My Orders** : When users click the login/user bottom, it will display three options and one of them it's my orders page. Here, users can see all of their order with the status of payment and shipping.
+    
+    - My Orders Page
+      
+      ![Screenshot 2024-10-17 235758](https://github.com/user-attachments/assets/8e9a025c-4168-4131-b761-8b88abdd7ec7)
+   
+    - My Orders Page location
+      
+      ![Screenshot 2024-10-17 235739](https://github.com/user-attachments/assets/7e7d55b0-d386-4cc9-b36f-170ed7af7f69)
+
+
+10.  **My Oders Detail** : Users can see the order summary detail when clicking the "view page" button in My Orders page. It will display the order summary in more detail.
+    
+  - My Orders Detail
+    
+    ![WhatsApp Image 2024-10-19 at 01 11 25](https://github.com/user-attachments/assets/cd259ae4-7eec-4f20-a25d-67c3be3a1660)
+
+
+    
+
+
+    
+12.  
+    
+
 
 
 
