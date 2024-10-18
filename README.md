@@ -1,4 +1,4 @@
-![Screenshot 2024-10-17 235728](https://github.com/user-attachments/assets/3e3fcc01-21e6-470e-993f-7a3f2f782bcc)# Aetherial Bakery
+# Aetherial Bakery
 **A Laravel project for Midterm of Framework Programming (IUP Class)**
 
 ## Team Members
@@ -40,8 +40,10 @@ PDM
 1. **Authentication**: Users can sign up, log in, and log out, managed by using Filament.
 2. **Dashboard**: Displays statistics on recent orders, total sales, and order statuses. Includes a search feature for quick navigation.
 3. **User Management**: Admins can view a list of all users, create new users, and edit or delete existing users.
-4. **Product Management**: Admins can manage product details, including adding new products, updating existing products, and deleting products.
-5. **Order Management**: Admins can view and filter orders by status, update order status, and view detailed information on each order.
+4. **Categories Management** : Admin can add a new categories for the products. Including updating existing categories, and deleting it.
+5. **Product Management**: Admins can manage product details, including adding new products, updating existing products, and deleting products.
+6.  **Order Management**: Admins can view and filter orders by status, update order status, and view detailed information on each order after the users make an order automatically.
+
 
 ### User Panel
 1. **Authentication**: Users can sign up, log in, and log out, managed by using Livewire.
@@ -351,7 +353,52 @@ public static function form(Form $form): Form
 
 ---
 
-### User Panels Explanation
+### Admin Panel Features and Explanation
+
+1. **Authentication**: Users can sign up, log in, and log out, managed by using Filament.
+   - Log in page for admin
+     
+     ![image](https://github.com/user-attachments/assets/c9310fa2-534f-4e08-a00a-a621b9729928)
+
+   - When User tried to access admin page, it will display "500 Forbidden". It preventing users to login as admin.
+     
+     ![image](https://github.com/user-attachments/assets/2e84e5af-1b09-4dd7-8a40-d22aa6eb6e04)
+
+     
+3. **Dashboard**: Displays statistics on recent orders, total sales, and order statuses. Includes a search feature for quick navigation.
+   
+   - Admin Dashboard Page
+     
+     ![Screenshot 2024-10-17 234012](https://github.com/user-attachments/assets/527a6ef2-bb7e-46a7-8e82-47e6c3ca9829)
+
+5. **User Management**: Admins can view a list of all users, create new users, and edit or delete existing users.
+
+   - Users data in admin page
+     
+     ![Screenshot 2024-10-17 234024](https://github.com/user-attachments/assets/cc56d21f-22ee-4d29-b949-cb889f49da3e)
+     
+6. **Categories Management** : Admin can add a new categories for the products. Including updating existing categories, and deleting it.
+   
+   - Categories page in admin
+     
+     ![Screenshot 2024-10-17 234033](https://github.com/user-attachments/assets/aa377961-02ca-4cf8-9fdb-9da9a525f9f0)
+
+
+8. **Product Management**: Admins can manage product details, including adding new products, updating existing products, and deleting products.
+
+   - Products data in admin page
+
+     ![Screenshot 2024-10-17 234051](https://github.com/user-attachments/assets/3c583f97-b968-4205-bc7c-977cf92e504b)
+
+10. **Order Management**: Admins can view and filter orders by status, update order status, and view detailed information on each order after the users make an order automatically.
+
+    - Order Management in admin page
+
+      ![Screenshot 2024-10-17 234058](https://github.com/user-attachments/assets/e6b5e115-783b-4570-86a1-498b9d6ca5e8)
+      
+
+
+### User Panels Fetaures and Exolanation
 
 
 1. **Authentication**: Users can sign up, log in, and log out, managed by using Filament.
@@ -441,9 +488,7 @@ public static function form(Form $form): Form
 
     
 
-
-    
-12.  
+## Code Explanation for Users Panel
     
 
 
