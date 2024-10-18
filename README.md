@@ -351,6 +351,51 @@ public static function form(Form $form): Form
 ### User Panels Explanation
 
 
+1. **Authentication**: Users can sign up, log in, and log out, managed by using Filament.
+   
+   - Login Page
+  
+     ![Screenshot 2024-10-17 234304](https://github.com/user-attachments/assets/b3aacf5c-4d31-42c5-b09b-a3b8fb7b17f2)
+
+   - Register Page
+
+     ![Screenshot 2024-10-17 234304](https://github.com/user-attachments/assets/45ad1905-0ef6-4d51-9c43-1e1bdd9cfb1e)
+     
+
+2. **Homepage**: Displays the homepage of Aetherial Bakery along with browse categories, and customer reviews.
+   
+   - Dashboard
+   
+   ![Screenshot 2024-10-17 234359](https://github.com/user-attachments/assets/734a68f3-5e1c-447b-9ec4-3c8d87508498)
+
+
+3. **Category Page**: List all of categories and can direct to the products page which has been filtered with the category selected before.
+
+   - Browse categories page
+
+     ![Screenshot 2024-10-17 234427](https://github.com/user-attachments/assets/38abe1be-50ba-4af0-b61e-172da3cc7e8c)
+
+4.  **Product**: User can browse for products, select, view product detail and add the quantity before adding products to cart.
+   
+   - Products Page
+
+     ![Screenshot 2024-10-17 234451](https://github.com/user-attachments/assets/7e74408a-c320-4bb5-8d30-8e4a90944121)
+
+   - View Product Detail, adding quantity
+
+     ![image](https://github.com/user-attachments/assets/d560a444-2ec4-452c-87dc-2bf28f3ea552)
+
+   - Add to cart
+     
+     ![image](https://github.com/user-attachments/assets/64e5808c-d18c-4e46-82d3-189e5e953de0)
+
+
+ 
+
+   
+6. 
+
+
 
 
 
