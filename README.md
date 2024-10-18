@@ -489,6 +489,61 @@ public static function form(Form $form): Form
     
 
 ## Code Explanation for Users Panel
+### Models and Livewire
+1.  For users panel, we use livewire to act as `Controller`for each features. In Model, we define the fillable coloumn and also the `relationship` between tables to tables.
+   
+   ![image](https://github.com/user-attachments/assets/411e9bb3-e861-4c30-85ff-e2869f3ebcd9)
+
+   - `SucessPage.php`
+     ```php
+     ...
+             namespace App\Livewire;
+        
+        use App\Models\Order;
+        use Livewire\Component;
+        use Livewire\Attributes\Title;
+        use Livewire\Attributes\Url;
+        use Stripe\Checkout\Session;
+        use Stripe\Stripe;
+        
+        #[Title('Success - Atherial Bakery')]
+        class SuccessPage extends Component
+        {
+            #[Url]
+            public $session_id;
+        
+            public function render()
+            {
+                $latest_order = Order::with('customer')->where('user_id', auth()->user()->id)->latest()->first();
+        
+                if ($this->session_id) {
+                   
+                    $session_info = Session::retrieve($this->session_id);
+        
+                    if ($session_info->payment_status != 'paid') {
+                        $latest_order->payment_status = 'failed';
+                        $latest_order->save();
+                        return redirect()->route('cancel');
+                    } elseif ($session_info->payment_status == 'paid') {
+                        $latest_order->payment_status = 'paid';
+                        $latest_order->save();
+                    }
+                }
+               
+        
+                return view('livewire.success-page', [
+                    'order' => $latest_order,
+                ]);
+            }
+        }
+
+     ...
+     ```
+
+
+   - 
+
+3.  
     
 
 
